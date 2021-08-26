@@ -8,8 +8,6 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import sys
 import datetime
-from tkinter import Tk
-from tkinter.filedialog import askopenfilename
 import sqlite3
 import os
 import shutil
