@@ -3,9 +3,7 @@ aiohttp==3.7.4.post0
 alabaster==0.7.12
 altair==4.1.0
 altgraph==0.17
-anaconda-client==1.7.2
-anaconda-navigator==1.10.0
-anaconda-project==0.8.3
+
 ansi2html==1.6.0
 anyio==3.3.0
 applaunchservices==0.2.1
@@ -244,7 +242,7 @@ sphinxcontrib-jsmath==1.0.1
 sphinxcontrib-qthelp==1.0.3
 sphinxcontrib-serializinghtml==1.1.4
 
-streamlit==0.87.0
+
 
 tables==3.6.1
 
@@ -288,3 +286,4 @@ zict==2.0.0
 
 zope.event==4.5.0
 
+streamlit==0.87.0
