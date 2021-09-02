@@ -12,7 +12,8 @@ import sqlite3
 import os
 import shutil
 import re
-from glob2 import glob
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 
 
@@ -100,18 +101,20 @@ def get_url_for_download(driver,url):
 
 #Load chromedriver and open website
 #==============================================================================
-def get_chromedriver(chromedriver_path,desktoppath):
+#def get_chromedriver(chromedriver_path,desktoppath):
+def get_chromedriver():
     #Set default setting for Chrome Driver when using Selenium
     #=============================================================
-    options = webdriver.ChromeOptions()
-    options.add_experimental_option('prefs', {
-    "download.default_directory": desktoppath,
-    "download.prompt_for_download": False, #To auto download the file
-    "download.directory_upgrade": True,
-    "plugins.always_open_pdf_externally": True #It will not show PDF directly in chrome
-    })
+    #options = webdriver.ChromeOptions()
+    #options.add_experimental_option('prefs', {
+    #"download.default_directory": desktoppath,
+    #"download.prompt_for_download": False, #To auto download the file
+    #"download.directory_upgrade": True,
+    #"plugins.always_open_pdf_externally": True #It will not show PDF directly in chrome
+    #})
 
-    driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
+    #driver = webdriver.Chrome(executable_path=chromedriver_path, options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install())
     return driver
 
 def login(username,password):
@@ -270,16 +273,16 @@ def download_files(df_download,driver,desktoppath):
 
 with st.expander('Web Crawler'):
     st.title('Selete Sites To Crawl')
-
+    
     sites = st.radio(
     "Select sites to crawl:",
     ('Forensic Science International', 'Wiley Online', 'Other websites'))
 
-    results = glob.glob('/**/chromedriver', recursive=True)  # workaround on streamlit sharing
-    chromedriver_path = results[0]
-    st.write(chromedriver_path)
+    #results = glob('/**/chromedriver', recursive=True)  # workaround on streamlit sharing
+    #chromedriver_path = results[0]
+    #st.write(chromedriver_path)
 
-    st.write('You selected `%s`' % chromedriver_path)
+    #st.write('You selected `%s`' % chromedriver_path)
 
     operating_system = st.selectbox('Select your Operating System',('Windows', 'MacOS'))
 
@@ -300,7 +303,8 @@ with st.expander('Web Crawler'):
                     desktoppath = desktoppath + r'\asg_dl'
                 else:
                     desktoppath = desktoppath + r'/asg_dl'
-                driver = get_chromedriver(chromedriver_path,desktoppath)
+                #driver = get_chromedriver(chromedriver_path,desktoppath)
+                driver = get_chromedriver()
                 get_url_and_wait_for_page_load(driver, url)
                 login(username,password)
                 crawler(num_page,num_result,page_to_crawl,url,vol_title,vol_url,num_complete)
@@ -352,7 +356,8 @@ with st.expander('Browser'):
                 desktoppath = desktoppath + r'\asg_dl'
             else:
                 desktoppath = desktoppath + r'/asg_dl'
-            driver = get_chromedriver(chromedriver_path,desktoppath)
+            #driver = get_chromedriver(chromedriver_path,desktoppath)
+            driver = get_chromedriver()
             get_url_and_wait_for_page_load(driver, 'https://www.sciencedirect.com/journal/forensic-science-international/issues')
             login(username,password)
             st.write(desktoppath)
