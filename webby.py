@@ -275,7 +275,9 @@ with st.expander('Web Crawler'):
     "Select sites to crawl:",
     ('Forensic Science International', 'Wiley Online', 'Other websites'))
 
-    chromedriver_path = st.text_input('Enter a file path:')
+    results = glob.glob('/**/chromedriver', recursive=True)  # workaround on streamlit sharing
+    chromedriver_path = results[0]
+    st.write(chromedriver_path)
 
     st.write('You selected `%s`' % chromedriver_path)
 
