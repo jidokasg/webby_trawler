@@ -12,6 +12,8 @@ import sqlite3
 import os
 import shutil
 import re
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename
 
 
 
@@ -274,7 +276,9 @@ with st.expander('Web Crawler'):
     "Select sites to crawl:",
     ('Forensic Science International', 'Wiley Online', 'Other websites'))
 
-    chromedriver_path = file_selector()
+    Tk().withdraw() # we don't want a full GUI, so keep the root window from appearing
+    chromedriver_path = askopenfilename() # show an "Open" dialog box and return the path to the selected file
+
     st.write('You selected `%s`' % chromedriver_path)
 
     operating_system = st.selectbox('Select your Operating System',('Windows', 'MacOS'))
