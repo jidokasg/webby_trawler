@@ -25,6 +25,7 @@ ipykernel==6.2.0
 ipython==7.26.0
 ipython-genutils==0.2.0
 ipywidgets==7.6.3
+glob2==0.7
 jedi==0.18.0
 Jinja2==3.0.1
 jsonschema==3.2.0
